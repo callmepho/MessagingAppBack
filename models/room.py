@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional, Literal
 from datetime import datetime
+from beanie import Document
 
 
 class RoomMember(BaseModel):
@@ -15,10 +16,7 @@ class LastMessagePreview(BaseModel):
   created_at: datetime
 
 
-class Room(BaseModel):
-  id: Optional[str] = None
-
-  type: Literal["direct", "group"]
+class Room(Document):
   members: List[RoomMember]
 
   name: Optional[str] = None
@@ -27,3 +25,6 @@ class Room(BaseModel):
 
   created_at: datetime = datetime.now()
   updated_at: datetime = datetime.now()
+  
+  class Settings:
+    name = "rooms"

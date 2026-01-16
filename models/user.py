@@ -1,9 +1,9 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import EmailStr
 from typing import Optional, Literal
 from datetime import datetime
+from beanie import Document
 
-
-class User(BaseModel):
+class User(Document):
   id: Optional[str] = None
 
   username: str
@@ -17,3 +17,12 @@ class User(BaseModel):
 
   created_at: datetime = datetime.now()
   updated_at: datetime = datetime.now()
+
+  class Settings:
+    name = "users"
+    indexes = [
+      {
+        "key": "email",
+        "unique": True
+      }
+    ]
