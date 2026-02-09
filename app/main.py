@@ -5,6 +5,10 @@ import socketio
 from socketio_server import sio
 from database import connect_mongo,disconnect_mongo
 
+from routes.users import router as users_router
+from routes.rooms import router as rooms_router
+from routes.messages import router as messages_router
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -18,6 +22,10 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+
+app.include_router(users_router, prefix="/users", tags=["Users"])
+app.include_router(rooms_router, prefix="/rooms", tags=["Rooms"])
+app.include_router(messages_router, prefix="/messages", tags=["Messages"])
 
 app.add_middleware(
     CORSMiddleware,

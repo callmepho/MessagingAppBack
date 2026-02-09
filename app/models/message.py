@@ -20,5 +20,5 @@ class Message(Document):
   class Settings:
     name = "messages"
     indexes = [
-      [("room_id", 1), ("created_at", -1)],
-      ]
+        [("room_id", 1), ("created_at", -1)]
+    ]

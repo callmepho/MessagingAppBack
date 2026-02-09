@@ -28,3 +28,6 @@ class Room(Document):
   
   class Settings:
     name = "rooms"
+    indexes = [
+        [("member_ids", 1)]
+    ]
